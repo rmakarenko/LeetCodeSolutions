@@ -1,0 +1,21 @@
+class Solution(object):
+
+    def runningSum(self, nums):
+        
+        output = []
+
+        current_sum = 0
+
+        for element in nums:
+
+            current_sum += element
+
+            output.append(current_sum)
+
+        return output
+        
+        """
+        :type nums: List[int]
+
+        :rtype: List[int]
+        """
