@@ -1,0 +1,27 @@
+class Solution(object):
+    def maximumWealth(self, accounts):
+        """
+        :type accounts: List[List[int]]
+        :rtype: int
+        """
+
+        customer_wealth = 0    
+        wealth = []
+
+        # go throught accuonts and make the list of sums
+
+        for i in range (len(accounts)):
+
+            for j in range (len(accounts[i])):
+
+                customer_wealth = customer_wealth + accounts[i][j]
+
+            wealth.append(customer_wealth)
+
+            customer_wealth = 0    
+
+        return max(wealth) 
+
+
+
+        
