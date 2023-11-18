@@ -1,0 +1,110 @@
+class Solution(object):
+
+    def findLeastNumOfUniqueInts(self, arr, k):
+ 
+        output = 0
+        unique_values = {}
+        
+        for elements_arr in arr:
+            if elements_arr not in unique_values:
+                    unique_values[elements_arr] = 0
+
+        print('unique values', unique_values)
+        # now dict with unique keys exist
+
+        for elements in arr:
+            unique_values[elements] = unique_values[elements] + 1
+
+        print('unique values', unique_values)    
+
+        # now dict is filled with values also
+
+        list_of_values = []
+
+        for elements in unique_values:
+
+            x = unique_values.get(elements)
+            list_of_values.append(x)
+
+        list_of_values = sorted(list_of_values)
+
+        print("list_of_values ", list_of_values)
+
+        left_elements = k  
+
+        if min(list_of_values) > k:
+            output = len(list_of_values)
+            print("1 if")
+            return output
+            
+
+        elif min(list_of_values) == k:
+            output =  len(list_of_values) - 1
+            print("2 if")
+            return output
+            
+
+        print("now while starts")
+
+        sum = 0
+        last_i = 0
+
+        
+
+        for i in range(len(list_of_values) - 1):
+
+            while left_elements >= sum + list_of_values[i + 1]:
+
+                sum = sum + list_of_values[i]
+                last_i = i    
+
+
+
+        left_elements = left_elements - last_i - 1
+
+        print("ostalos ot left elements", left_elements, 'last_i', last_i )
+
+        for i in range(last_i):
+
+            list_of_values.pop(i)
+
+        print("ostalos ot list_of_values", list_of_values)
+
+
+
+
+        print("after the while", 'sum = ', sum, 'last_i', last_i )
+
+        if sum == left_elements:
+            output = len(list_of_values) 
+            print("11 if")
+            return output
+            
+
+        elif sum > left_elements:
+            output =  len(list_of_values) - last_i - 2
+            print("22 if")
+            return output
+            
+
+        #output = len(list_of_values) - last_i
+
+        print("output ", output)
+        print("dlina spiska", len(list_of_values))
+
+            #left_elements = left_elements - min(list_of_values)        
+            #list_of_values.remove(min(list_of_values))
+
+            #print("вайл закончен, ", 'left elements = ', left_elements)
+            
+        
+        #if min(list_of_values) == left_elements:
+            # output =  len(list_of_values) - 1
+
+        # print("был вход в первый иф")
+
+        #if min(list_of_values) > left_elements:
+            # output =  len(list_of_values) 
+            #print("был вход во второй иф")   
+
+        return output
