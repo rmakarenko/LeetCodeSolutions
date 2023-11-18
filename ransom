@@ -1,0 +1,68 @@
+class Solution(object):
+    
+    def dict_creator(self, input):
+
+
+        dicted_ransom = {}
+        dicted_magaz = {}    
+        listed_input = []
+        dict_from_input = {}
+
+        for i in range(len(input)):
+            listed_input.append(str(input[i]))
+
+        for i in range(len(input)):
+            if listed_input[i] not in dict_from_input:
+                dict_from_input[listed_input[i]] = 0
+
+        for i in range(len(listed_input)):
+            if listed_input[i] in dict_from_input:
+                dict_from_input[listed_input[i]] = dict_from_input[listed_input[i]] + 1    
+        
+        return dict_from_input
+
+
+    def canConstruct(self, ransomNote, magazine):
+        """
+        :type ransomNote: str
+        :type magazine: str
+        :rtype: bool
+        """
+
+        
+        listed_magazine = []
+        listed_ransomNote = []
+        dict_ransomNote = {}
+
+        for i in range(len(magazine)):
+            listed_magazine.append(str(magazine[i]))
+
+        for i in range(len(ransomNote)):
+            listed_ransomNote.append(str(ransomNote[i]))
+
+        # now magazine is presented as a list of strings listed_magazine    
+
+        dicted_ransom = {}
+        dicted_magaz = {}
+
+        dicted_ransom = self.dict_creator(ransomNote)
+        dicted_magaz = self.dict_creator(magazine)
+
+        counter = len(dicted_ransom)
+
+        print(dicted_ransom)
+        print(dicted_magaz)
+
+        for key in dicted_ransom:
+            
+            value = dicted_ransom[key]
+
+            if key in dicted_magaz: 
+            
+                value_magaz = dicted_magaz[key]
+
+                if value <= value_magaz:
+
+                     counter = counter - 1
+
+        return counter == 0
