@@ -1,0 +1,28 @@
+class Solution(object):
+    def removeElement(self, nums, val):
+        """
+        :type nums: List[int]
+        :type val: int
+        :rtype: int
+        """
+
+        val_counter = 0
+        val_positions = []
+        second_counter = 0
+        temporary = 0
+        delta = len(nums) - len(val_positions)
+
+        for i in range (len(nums)): # find the number of val occurences
+            if nums[i] == val:
+                val_counter += 1
+                val_positions.append(i)
+
+        for i in range (len(nums) - 1, len(nums) - len(val_positions) - 1, -1):
+  
+            if nums[i] != val:
+
+                temporary = nums
+
+                nums[i], nums[val_positions[i - delta]] = nums[val_positions[i - delta]], nums[i]
+
+        return len(nums) - len(val_positions)        
